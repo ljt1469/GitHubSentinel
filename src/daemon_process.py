@@ -11,13 +11,13 @@ from llm import LLM
 from subscription_manager import SubscriptionManager
 from scheduler import Scheduler
 from logger import LOG
-
+import os
 def run_scheduler(scheduler):
     scheduler.start()
 
 def main():
     config = Config()
-    github_client = GitHubClient(config.github_token)
+    github_client = GitHubClient(os.getenv("github_token"))
     notifier = Notifier(config.notification_settings)
     llm = LLM()
     report_generator = ReportGenerator(llm)
